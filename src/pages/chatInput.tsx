@@ -1,5 +1,6 @@
 import { ChangeEventHandler, KeyboardEventHandler, MouseEventHandler } from "react";
 import styled from "styled-components";
+import { isMobile } from "react-device-detect";
 
 type InputProps = {
     newMessage: string,
@@ -24,13 +25,13 @@ const InputArea: React.FC<InputProps> = ({
     
     return (
         <InputContainer>
-            <Input type="text"
+            <Input isMobile={isMobile} type="text"
                 placeholder="Type a message"
                 value={newMessage}
                 onChange={handleInputChange}
                 onKeyDown={handleKeyDown} />
             <Button onClick={handleSendMessage}>送信</Button>
-            <ClearButton onClick={clearMessages}>クリア</ClearButton>
+            <ClearButton isMobile={isMobile} onClick={clearMessages}>クリア</ClearButton>
         </InputContainer>
     )
 }
@@ -38,14 +39,13 @@ const InputArea: React.FC<InputProps> = ({
 const InputContainer = styled.div`
   display: flex;
   margin: 16px auto;
-  
 `;
 
-const Input = styled.input`
+const Input = styled.input<{isMobile: boolean}>`
   flex: 1;
   margin-right: 8px;
   padding: 8px;
-  border: solid #e6e6fa;
+  border: solid #afeeee;
   border-radius: 4px;
 `;
 
@@ -53,19 +53,19 @@ const Button = styled.button`
   padding: 8px 16px;
   border: none;
   border-radius: 4px;
-  background-color: #9370db;
+  background-color: #20b2aa;
   color: white;
   cursor: pointer;
 `;
 
-const ClearButton = styled.button`
+const ClearButton = styled.button<{isMobile: boolean}>`
   border: none;
   background-color: #c0c0c0;
   color: #fff;
   border-radius: 4px;
   padding: 6px 12px;
   cursor: pointer;
-  margin-left: 10px;
+  margin-left: ${({isMobile}) => isMobile ? '8px' : '10px'};
 `;
 
 export default InputArea;

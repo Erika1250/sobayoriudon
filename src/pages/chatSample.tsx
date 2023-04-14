@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { getRandomArticle } from './chatApi';
 import ChatContainer from './chatContainer';
 import InputArea from './chatInput';
+import { isMobile } from 'react-device-detect';
 
 export type ChatMessage = {
   id: number;
@@ -107,7 +108,7 @@ const Chat: React.FC = memo(() => {
     };
 
   return (
-    <Container>
+    <Container isMobile={isMobile}>
         <ChatContainer messageArrState={messageArrState}/>
         <InputArea newMessage={newMessage}
             handleInputChange={handleInputChange}
@@ -117,17 +118,6 @@ const Chat: React.FC = memo(() => {
     </Container>
   );
 });
-
-export const sampleData: ChatMessage[] = [
-//   { id: 1, sender: 'me', message: 'Hello!', timestamp: '2022-04-13 10:00' },
-//   { id: 2, sender: 'other', message: 'Hi there!', timestamp: '2022-04-13 10:01' },
-//   { id: 3, sender: 'me', message: 'How are you?', timestamp: '2022-04-13 10:02' },
-//   { id: 4, sender: 'other', message: 'I am doing well, thank you!', timestamp: '2022-04-13 10:03' },
-//   { id: 5, sender: 'me', message: 'Hello!', timestamp: '2022-04-13 10:04' },
-//   { id: 6, sender: 'other', message: 'Hi there!', timestamp: '2022-04-13 10:05' },
-//   { id: 7, sender: 'me', message: 'How are you?', timestamp: '2022-04-13 10:06' },
-//   { id: 8, sender: 'other', message: 'I am doing well, thank you!', timestamp: '2022-04-13 10:07' },
-];
 
 const weatherReplies = [
     "今日の天気は晴れです🌞",
@@ -146,8 +136,9 @@ const greetingReplies = [
     "おやすみなさい、ご主人様💤\r\n今日も一日お疲れさまでした🍵",
 ];
 
-const Container = styled.div`
-    width: 80%;
-    margin: 80px auto;
+const Container = styled.div<{isMobile: boolean}>`
+    height: ${({isMobile}) => isMobile ? '100vh' : '80vh' };
+    width: ${({isMobile}) => isMobile ? '100%' : '80%' };
+    margin: ${({isMobile}) => isMobile ? 'auto' : '80px auto' };
 `
 export default Chat;

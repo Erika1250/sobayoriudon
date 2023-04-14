@@ -1,6 +1,7 @@
 import { memo, useEffect, useRef } from "react"
 import styled from "styled-components"
 import { ChatMessage } from "./chatSample";
+import { isMobile } from "react-device-detect";
 
 type ChatContainerProps = {
     messageArrState: ChatMessage[];
@@ -18,13 +19,12 @@ const ChatContainer: React.FC<ChatContainerProps> = memo(({ messageArrState }) =
     useEffect(() => {
         if (messagesEndRef.current) {
             messagesEndRef.current.scrollTop = messagesEndRef.current.scrollHeight;
-            console.log(messagesEndRef);
         }
     }, [messageArrState]);
 
     
     return (
-        <SContainer ref={messagesEndRef}>
+        <SContainer isMobile={isMobile} ref={messagesEndRef}>
             {messageArrState.map((message) => (
                 <>
                     <SChatBubble isMe={message.sender === 'me'}>
@@ -39,11 +39,11 @@ const ChatContainer: React.FC<ChatContainerProps> = memo(({ messageArrState }) =
     )
 });
 
-const SContainer = styled.div`
+const SContainer = styled.div<{isMobile: boolean}>`
     display: flex;
     flex-direction: column;
     overflow-y: scroll;
-    height: 500px;
+    height: ${({isMobile}) => isMobile ? '85%' : '85%' };
     margin: auto;
     padding: 16px;
 
@@ -55,7 +55,7 @@ const SChatBubble = styled.div<{ isMe: boolean }>`
     padding: 8px 16px;
     border-radius: 16px;
     color: ${({ isMe }) => (isMe ? 'white' : 'black')};
-    background-color:${({ isMe }) => (isMe ? '#9370db' : '#e6e6fa')};
+    background-color:${({ isMe }) => (isMe ? '#20b2aa' : '#b0e0e6')};
     align-self: ${({ isMe }) => (isMe ? 'flex-end': 'flex-start')};
     max-width: 70%;
     text-align: left;
