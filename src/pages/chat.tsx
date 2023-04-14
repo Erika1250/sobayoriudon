@@ -1,6 +1,6 @@
 import React, { useEffect, useCallback, useRef, useState, memo } from 'react';
 import styled from 'styled-components';
-import { getRandomArticle } from './chatApi';
+import { getRandomArticle, getRandomCat, getRandomDog } from './chatApi';
 import ChatContainer from './chatContainer';
 import InputArea from './chatInput';
 import { isMobile } from 'react-device-detect';
@@ -10,6 +10,7 @@ export type ChatMessage = {
   sender: string;
   message: string;
   url?: string | null;
+  img?: string | null;
   timestamp: string;
 }
 
@@ -29,19 +30,20 @@ const Chat: React.FC = memo(() => {
         if (newMessage.trim() === "") {
             return;
         }
-        addMessage(newMessage, null, 'me');
+        addMessage(newMessage, null, null, 'me');
     };
     useEffect(() => {
         handleReplyMessage();
     }, [messageArrState])
 
-    const addMessage = (message: string, url: string | null, sender: string) => {
+    const addMessage = (message: string, url: string | null, img: string | null, sender: string) => {
         const timestamp = new Date().toLocaleString();
         const newChatMessage: ChatMessage = {
           id: messageArrState.length + 1,
           sender: sender,
           message: message,
           url: url,
+          img: img,
           timestamp: timestamp,
         };
         setNewMessage('');
@@ -50,45 +52,72 @@ const Chat: React.FC = memo(() => {
 
     const handleReplyMessage = () => {
         let replies: string[] = [];
+        let reply = "";
+        let randomIndex = 0;
+        let imgUrl = "";
         const latestMessage = messageArrState[messageArrState.length - 1]?.message;
-        if(latestMessage === "今日の天気") {
-            replies = weatherReplies;
-            setTimeout(() => {
-                const randomIndex = Math.floor(Math.random() * replies.length);
-                const message = replies[randomIndex];
-                addMessage(message, null, 'other');
-            }, 1000);
-        } else if(latestMessage === "明日の天気") {
-            replies = weatherTomorrowReplies;
-            setTimeout(() => {
-                const randomIndex = Math.floor(Math.random() * replies.length);
-                const message = replies[randomIndex];
-                addMessage(message, null, 'other');
-            }, 1000);
-        } else if (latestMessage === "おはよう") {
-            const reply = greetingReplies[0];
-            console.log(new Date().toLocaleString());
-            setTimeout(() => {
-                addMessage(reply, null, 'other');
-            }, 1000);
-        } else if (latestMessage === "おやすみ") {
-            const reply = greetingReplies[1];
-            console.log(new Date().toLocaleString());
-            setTimeout(() => {
-                addMessage(reply,null, 'other');
-            }, 1000);
-        } else if (latestMessage === "今日の記事") {
-            let reply = "";
-            let url = "";
-            getRandomArticle().then(res => {
-                const { data, status } = res;
-                const pageID = data.query.pageids;
-                url = data.query.pages[pageID].fullurl;
-                reply = `今日の記事は「${data.query.pages[pageID].title}」です🔍`;
-            });
-            setTimeout(() => {
-                addMessage(reply, url, 'other');
-            }, 1000);
+        switch(latestMessage) {
+            case "今日の天気":
+                replies = weatherReplies;
+                randomIndex = Math.floor(Math.random() * replies.length);
+                reply = replies[randomIndex];
+                setTimeout(() => {
+                    
+                    addMessage(reply, null, null, 'other');
+                }, 1000);
+                break;
+            case "明日の天気":
+                replies = weatherTomorrowReplies;
+                randomIndex = Math.floor(Math.random() * replies.length);
+                reply = replies[randomIndex];
+                setTimeout(() => {
+                    addMessage(reply, null, null, 'other');
+                }, 1000);
+                break;
+            case "おはよう":
+                reply = greetingReplies[0];
+                setTimeout(() => {
+                    addMessage(reply, null, null, 'other');
+                }, 1000);
+                break;
+            case "おやすみ":
+                reply = greetingReplies[1];
+                setTimeout(() => {
+                    addMessage(reply,null, null, 'other');
+                }, 1000);
+                break;
+            case "今日の記事":
+                getRandomArticle().then(res => {
+                    const { data, status } = res;
+                    const pageID = data.query.pageids;
+                    const url = data.query.pages[pageID].fullurl;
+                    reply = `今日の記事は「${data.query.pages[pageID].title}」です🔍`;
+                    setTimeout(() => {
+                        addMessage(reply, url, null, 'other');
+                    }, 1000);
+                });
+                break;
+            case "犬":
+                getRandomDog().then(res => {
+                    const { data, status } = res;
+                    imgUrl = data.message;
+                    reply = "今日の犬です🐕";
+                    setTimeout(() => {
+                        addMessage(reply, null, imgUrl, 'other');
+                    }, 1000);
+                });
+                break;
+            case "猫":
+                getRandomCat().then(res => {
+                    const { data, status } = res;
+                    imgUrl = data[0].url;
+                    reply = "今日の猫です🐈";
+                    setTimeout(() => {
+                        addMessage(reply, null, imgUrl, 'other');
+                    }, 1000);
+                })
+            default:
+                console.log("error");
         }
     }
 
@@ -137,7 +166,7 @@ const greetingReplies = [
 ];
 
 const Container = styled.div<{isMobile: boolean}>`
-    height: ${({isMobile}) => isMobile ? '90vh' : '100vh' };
+    height: ${({isMobile}) => isMobile ? '80vh' : '100vh' };
     width: ${({isMobile}) => isMobile ? '100%' : '80%' };
     margin: ${({isMobile}) => isMobile ? 'auto' : '80px auto' };
 `

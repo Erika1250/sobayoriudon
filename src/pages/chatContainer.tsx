@@ -1,6 +1,6 @@
 import { memo, useEffect, useRef } from "react"
 import styled from "styled-components"
-import { ChatMessage } from "./chatSample";
+import { ChatMessage } from "./chat";
 import { isMobile } from "react-device-detect";
 
 type ChatContainerProps = {
@@ -29,7 +29,12 @@ const ChatContainer: React.FC<ChatContainerProps> = memo(({ messageArrState }) =
                 <>
                     <SChatBubble isMe={message.sender === 'me'}>
                         <SMessage>{message.message}</SMessage>
-                        <SLink href={message.url ?? ''} target="_blank">{message.url}</SLink>
+                        {message.url && (
+                            <SLink href={message.url} target="_blank">{message.url}</SLink>
+                        )}
+                        {message.img && (
+                            <SImg src={message.img} />
+                        )}
                     </SChatBubble>
                     <STimestamp isMe={message.sender === 'me'}>{message.timestamp}</STimestamp>
                 </>
@@ -70,6 +75,10 @@ const SLink = styled.a`
     color: #4169e1;
     text-decoration:underline;
     text-align: left;
+`
+
+const SImg = styled.img`
+    max-width: 100%;
 `
 
 const STimestamp = styled.span<{ isMe: boolean }>`
