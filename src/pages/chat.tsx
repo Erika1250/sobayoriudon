@@ -29,7 +29,7 @@ type Message = {
  */
 const Chat: React.FC = memo(() => {
     const [inputMessage, setInputMessage] = useState<string>('');
-    const [messageArrState, setMessageArrState] = useState<ChatMessage[]>([]);
+    const [messageArrState, setMessageArrState] = useState<ChatMessage[]>([initialMessage]);
 
     /**
      * 入力内容が空白の場合、処理を行わない。
@@ -195,6 +195,13 @@ const howToUse = `以下のメッセージを入力すると返信します🌷\
     ・「猫」：今日の猫を返します🐈
     ・「犬」：今日の犬を返します🐕
 `
+
+const initialMessage: ChatMessage = {
+    id: 1,
+    sender: 'other',
+    message1: howToUse,
+    timestamp: new Date().toLocaleString(),
+}
 
 const Container = styled.div<{isMobile: boolean}>`
     height: 85vh;
