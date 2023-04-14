@@ -166,7 +166,7 @@ const greetingReplies = [
 ];
 
 const Container = styled.div<{isMobile: boolean}>`
-    height: ${({isMobile}) => isMobile ? '80vh' : '100vh' };
+    height: 85vh;
     width: ${({isMobile}) => isMobile ? '100%' : '80%' };
     margin: ${({isMobile}) => isMobile ? 'auto' : '80px auto' };
 `

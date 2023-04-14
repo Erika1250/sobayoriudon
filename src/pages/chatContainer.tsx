@@ -83,7 +83,7 @@ const SImg = styled.img`
 
 const STimestamp = styled.span<{ isMe: boolean }>`
     font-size: 12px;
-    color: 'black'
+    color: black;
     margin-left: 8px;
     margin-bottom: 16px;
     align-self: ${({ isMe }) => (isMe ? 'flex-end': 'flex-start')};
