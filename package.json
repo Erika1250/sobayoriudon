@@ -1,0 +1,32 @@
+{
+  "homepage": "https://Erika1250.github.io/sobayoriudon/",
+  "name": "sobayoriudon",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "predeploy": "npm run build",
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "rm": "rm -rf docs",
+    "mv": "mv dist docs",
+    "git": "git add . && git commit && git push origin main",
+    "deploy": "npm run rm && npm run build && npm run mv && npm run git",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "axios": "^1.3.5",
+    "gh-pages": "^5.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "styled-components": "^5.3.9"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
+    "@types/styled-components": "^5.1.26",
+    "@vitejs/plugin-react": "^3.1.0",
+    "typescript": "^4.9.3",
+    "vite": "^4.2.0"
+  }
+}
