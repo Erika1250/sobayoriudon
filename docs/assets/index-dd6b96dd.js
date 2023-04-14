@@ -89,7 +89,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
     max-width: 100%;
 `,hw=Nt.span`
     font-size: 12px;
-    color: 'black'
+    color: black;
     margin-left: 8px;
     margin-bottom: 16px;
     align-self: ${({isMe:e})=>e?"flex-end":"flex-start"};
@@ -120,7 +120,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
 `,kw=$e.memo(()=>{const[e,t]=$e.useState(""),[n,r]=$e.useState([]),i=()=>{e.trim()!==""&&o(e,null,null,"me")};$e.useEffect(()=>{l()},[n]);const o=(v,g,c,y)=>{const f=new Date().toLocaleString(),p={id:n.length+1,sender:y,message:v,url:g,img:c,timestamp:f};t(""),r([...n,p])},l=()=>{var p;let v=[],g="",c=0,y="";switch((p=n[n.length-1])==null?void 0:p.message){case"今日の天気":v=Ew,c=Math.floor(Math.random()*v.length),g=v[c],setTimeout(()=>{o(g,null,null,"other")},1e3);break;case"明日の天気":v=xw,c=Math.floor(Math.random()*v.length),g=v[c],setTimeout(()=>{o(g,null,null,"other")},1e3);break;case"おはよう":g=df[0],setTimeout(()=>{o(g,null,null,"other")},1e3);break;case"おやすみ":g=df[1],setTimeout(()=>{o(g,null,null,"other")},1e3);break;case"今日の記事":B0().then(S=>{const{data:m,status:d}=S,h=m.query.pageids,w=m.query.pages[h].fullurl;g=`今日の記事は「${m.query.pages[h].title}」です🔍`,setTimeout(()=>{o(g,w,null,"other")},1e3)});break;case"犬":V0().then(S=>{const{data:m,status:d}=S;y=m.message,g="今日の犬です🐕",setTimeout(()=>{o(g,null,y,"other")},1e3)});break;case"猫":W0().then(S=>{const{data:m,status:d}=S;y=m[0].url,g="今日の猫です🐈",setTimeout(()=>{o(g,null,y,"other")},1e3)});default:console.log("error")}};return Fr(Cw,{isMobile:Uo,children:[vt(uw,{messageArrState:n}),vt(vw,{newMessage:e,handleInputChange:v=>{t(v.target.value)},handleSendMessage:i,clearMessages:()=>{r([])},handleKeyDown:v=>{v.key==="Enter"&&i()}})]})}),Ew=["今日の天気は晴れです🌞","今日の天気は曇りです☁","今日の天気は雨です☔"],xw=["明日の天気は晴れです🌞","明日の天気は曇りです☁","明日の天気は雨です☔"],df=[`おはようございます、ご主人様💖\r
 今日も一日がんばりましょう🍭`,`おやすみなさい、ご主人様💤\r
 今日も一日お疲れさまでした🍵`],Cw=Nt.div`
-    height: ${({isMobile:e})=>e?"80vh":"100vh"};
+    height: 85vh;
     width: ${({isMobile:e})=>e?"100%":"80%"};
     margin: ${({isMobile:e})=>e?"auto":"80px auto"};
 `;as.createRoot(document.getElementById("root")).render(vt(vi.StrictMode,{children:vt(kw,{})}));
