@@ -21,14 +21,16 @@ const ChatContainer: React.FC<ChatContainerProps> = memo(({ messageArrState }) =
             messagesEndRef.current.scrollTop = messagesEndRef.current.scrollHeight;
         }
     }, [messageArrState]);
-
     
     return (
         <SContainer isMobile={isMobile} ref={messagesEndRef}>
             {messageArrState.map((message) => (
                 <>
                     <SChatBubble isMe={message.sender === 'me'}>
-                        <SMessage>{message.message}</SMessage>
+                        <SMessage>{message.message1}{message.icon && (<SIcon src={message.icon} width={32} height={24} />)}</SMessage>
+                        {message.message2 && (
+                            <SMessage>{message.message2}</SMessage>
+                        )}
                         {message.url && (
                             <SLink href={message.url} target="_blank">{message.url}</SLink>
                         )}
@@ -79,6 +81,10 @@ const SLink = styled.a`
 
 const SImg = styled.img`
     max-width: 100%;
+`
+
+const SIcon = styled.img`
+    vertical-align: bottom;
 `
 
 const STimestamp = styled.span<{ isMe: boolean }>`

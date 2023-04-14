@@ -11,3 +11,7 @@ export const getRandomDog = () => {
 export const getRandomCat = () => {
     return axios.get("https://api.thecatapi.com/v1/images/search?api_key=live_jzhQPOY0wQxwboDEfeUqFzcyX6vo1xbKXyawfipOwklPpSOweWokuAn2VIF9WKMO");
 }
+
+export const getForecast = (cityCode: number) => {
+    return axios.get(`https://weather.tsukumijima.net/api/forecast/city/${cityCode}`);
+}
