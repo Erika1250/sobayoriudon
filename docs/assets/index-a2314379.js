@@ -100,7 +100,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
   margin: 16px auto;
 `,kw=Et.input`
   flex: 1;
-  margin-right: 8px;
+  margin-right: ${({isMobile:e})=>e?"4px":"8px"};
   padding: 8px;
   border: solid #afeeee;
   border-radius: 4px;
@@ -118,7 +118,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
   border-radius: 4px;
   padding: 6px 12px;
   cursor: pointer;
-  margin-left: ${({isMobile:e})=>e?"8px":"10px"};
+  margin-left: ${({isMobile:e})=>e?"4px":"8px"};
 `,Cw=$e.memo(()=>{const[e,t]=$e.useState(""),[n,r]=$e.useState([Tw]),i=()=>{if(e.trim()==="")return;o({message1:e},"me")};$e.useEffect(()=>{s()},[n]);const o=(v,f)=>{const g=new Date().toLocaleString(),c={id:n.length+1,sender:f,message1:v.message1,message2:v.message2,icon:v.icon,url:v.url,img:v.img,timestamp:g};t(""),r([...n,c])},l=v=>{setTimeout(()=>{o(v,"other")},1e3)},s=()=>{var g;const v={message1:""};switch((g=n[n.length-1])==null?void 0:g.message1){case"使い方":v.message1=Zm,l(v);break;case"今日の天気":af(130010).then(c=>{const{data:m,status:S}=c,p=m.forecasts[0];v.message1=`今日の天気は${p.telop}です`,v.message2=`\r
 詳細：${p.detail.weather.replaceAll(/\s+/g,"")}\r
 風の強さ：${p.detail.wind.replaceAll(/\s+/g,"")}\r
