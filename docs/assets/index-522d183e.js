@@ -119,15 +119,24 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
   padding: 6px 12px;
   cursor: pointer;
   margin-left: ${({isMobile:e})=>e?"8px":"10px"};
-`,xw=$e.memo(()=>{const[e,t]=$e.useState(""),[n,r]=$e.useState([]),i=()=>{if(e.trim()==="")return;o({message1:e},"me")};$e.useEffect(()=>{s()},[n]);const o=(v,f)=>{const g=new Date().toLocaleString(),c={id:n.length+1,sender:f,message1:v.message1,message2:v.message2,icon:v.icon,url:v.url,img:v.img,timestamp:g};t(""),r([...n,c])},l=v=>{setTimeout(()=>{o(v,"other")},1e3)},s=()=>{var g;const v={message1:""};switch((g=n[n.length-1])==null?void 0:g.message1){case"今日の天気":af(130010).then(c=>{const{data:m,status:S}=c,p=m.forecasts[0];v.message1=`今日の天気は${p.telop}です`,v.message2=`\r
+`,xw=$e.memo(()=>{const[e,t]=$e.useState(""),[n,r]=$e.useState([]),i=()=>{if(e.trim()==="")return;o({message1:e},"me")};$e.useEffect(()=>{s()},[n]);const o=(v,f)=>{const g=new Date().toLocaleString(),c={id:n.length+1,sender:f,message1:v.message1,message2:v.message2,icon:v.icon,url:v.url,img:v.img,timestamp:g};t(""),r([...n,c])},l=v=>{setTimeout(()=>{o(v,"other")},1e3)},s=()=>{var g;const v={message1:""};switch((g=n[n.length-1])==null?void 0:g.message1){case"使い方":v.message1=Cw,l(v);break;case"今日の天気":af(130010).then(c=>{const{data:m,status:S}=c,p=m.forecasts[0];v.message1=`今日の天気は${p.telop}です`,v.message2=`\r
 詳細：${p.detail.weather.replaceAll(/\s+/g,"")}\r
 風の強さ：${p.detail.wind.replaceAll(/\s+/g,"")}\r
 降水確率：${p.chanceOfRain.T00_06}　${p.chanceOfRain.T06_12}　${p.chanceOfRain.T12_18}　${p.chanceOfRain.T18_24}`,v.icon=p.image.url,l(v)});break;case"明日の天気":af(130010).then(c=>{const{data:m,status:S}=c,p=m.forecasts[1];v.message1=`明日の天気は${p.telop}です`,v.message2=`\r
 詳細：${p.detail.weather.replaceAll(/\s+/g,"")}\r
 風の強さ：${p.detail.wind.replaceAll(/\s+/g,"")}\r
-降水確率：${p.chanceOfRain.T00_06}　${p.chanceOfRain.T06_12}　${p.chanceOfRain.T12_18}　${p.chanceOfRain.T18_24}`,v.icon=p.image.url,l(v)});break;case"おはよう":v.message1=mf[0],l(v);break;case"おやすみ":v.message1=mf[1],l(v);break;case"今日の記事":W0().then(c=>{const{data:m,status:S}=c,p=m.query.pageids;v.message1=`今日の記事は「${m.query.pages[p].title}」です🔍`,v.url=m.query.pages[p].fullurl,l(v)});break;case"犬":H0().then(c=>{const{data:m,status:S}=c;v.message1="今日の犬です🐕",v.img=m.message,l(v)});break;case"猫":Q0().then(c=>{const{data:m,status:S}=c;v.message1="今日の猫です🐈",v.img=m[0].url,l(v)})}};return Vn(Cw,{isMobile:Uo,children:[st(fw,{messageArrState:n}),st(yw,{newMessage:e,handleInputChange:v=>{t(v.target.value)},handleSendMessage:i,clearMessages:()=>{r([])},handleKeyDown:v=>{v.key==="Enter"&&i()}})]})}),mf=[`おはようございます、ご主人様💖\r
-今日も一日がんばりましょう🍭`,`おやすみなさい、ご主人様💤\r
-今日も一日お疲れさまでした🍵`],Cw=Et.div`
+降水確率：${p.chanceOfRain.T00_06}　${p.chanceOfRain.T06_12}　${p.chanceOfRain.T12_18}　${p.chanceOfRain.T18_24}`,v.icon=p.image.url,l(v)});break;case"おはよう":v.message1=mf[0],l(v);break;case"おやすみ":v.message1=mf[1],l(v);break;case"今日の記事":W0().then(c=>{const{data:m,status:S}=c,p=m.query.pageids;v.message1=`今日の記事は「${m.query.pages[p].title}」です🔍`,v.url=m.query.pages[p].fullurl,l(v)});break;case"犬":H0().then(c=>{const{data:m,status:S}=c;v.message1="今日の犬です🐕",v.img=m.message,l(v)});break;case"猫":Q0().then(c=>{const{data:m,status:S}=c;v.message1="今日の猫です🐈",v.img=m[0].url,l(v)})}};return Vn(Tw,{isMobile:Uo,children:[st(fw,{messageArrState:n}),st(yw,{newMessage:e,handleInputChange:v=>{t(v.target.value)},handleSendMessage:i,clearMessages:()=>{r([])},handleKeyDown:v=>{v.key==="Enter"&&i()}})]})}),mf=[`おはようございます、ご主人様💖\r
+今日も一日がんばりましょう🍭`,`おやすみなさい、ご主人様🌙\r
+今日も一日お疲れさまでした🍵`],Cw=`以下のメッセージを入力すると返信します✨\r
+
+    ・「おはよう」：朝の挨拶を返します🌅
+    ・「おやすみ」：夜の挨拶を返します🌃
+    ・「今日の天気」：今日の天気を返します🌞
+    ・「明日の天気」：明日の天気を返します🌞
+    （天気予報 API（livedoor 天気互換）を使用しています）
+    ・「猫」：今日の猫を返します🐈
+    ・「犬」：今日の犬を返します🐕
+`,Tw=Et.div`
     height: 85vh;
     width: ${({isMobile:e})=>e?"100%":"80%"};
     margin: ${({isMobile:e})=>e?"auto":"80px auto"};
