@@ -94,6 +94,10 @@ const Chat: React.FC = memo(() => {
         };
         const latestMessage = messageArrState[messageArrState.length - 1]?.message1;
         switch(latestMessage) {
+            case "使い方":
+                reply.message1 = howToUse;
+                replyMessage(reply);
+                break;
             case "今日の天気":
                 getForecast(130010).then(res => {
                     const { data, status } = res;
@@ -177,22 +181,20 @@ const Chat: React.FC = memo(() => {
   );
 });
 
-const weatherReplies = [
-    "今日の天気は晴れです🌞",
-    "今日の天気は曇りです☁",
-    "今日の天気は雨です☔",
-];
-
-const weatherTomorrowReplies = [
-    "明日の天気は晴れです🌞",
-    "明日の天気は曇りです☁",
-    "明日の天気は雨です☔",
-];
-
 const greetingReplies = [
     "おはようございます、ご主人様💖\r\n今日も一日がんばりましょう🍭",
-    "おやすみなさい、ご主人様💤\r\n今日も一日お疲れさまでした🍵",
+    "おやすみなさい、ご主人様🌙\r\n今日も一日お疲れさまでした🍵",
 ];
+
+const howToUse = `以下のメッセージを入力すると返信します✨\r\n
+    ・「おはよう」：朝の挨拶を返します🌅
+    ・「おやすみ」：夜の挨拶を返します🌃
+    ・「今日の天気」：今日の天気を返します🌞
+    ・「明日の天気」：明日の天気を返します🌞
+    （天気予報 API（livedoor 天気互換）を使用しています）
+    ・「猫」：今日の猫を返します🐈
+    ・「犬」：今日の犬を返します🐕
+`
 
 const Container = styled.div<{isMobile: boolean}>`
     height: 85vh;
