@@ -129,11 +129,13 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
 今日も一日がんばりましょう🍭`,`おやすみなさい、ご主人様🌙\r
 今日も一日お疲れさまでした🍵`],Zm=`以下のメッセージを入力すると返信します🌷\r
 
+    ・「使い方」：このメッセージを返します🔧
     ・「おはよう」：朝の挨拶を返します🌅
     ・「おやすみ」：夜の挨拶を返します🌃
     ・「今日の天気」：今日の天気を返します🌞
     ・「明日の天気」：明日の天気を返します🌞
     （天気予報 API（livedoor 天気互換）を使用しています）
+    ・「今日の記事」：Wikipediaの記事をランダムで返します📰
     ・「猫」：今日の猫を返します🐈
     ・「犬」：今日の犬を返します🐕
 `,Tw={id:1,sender:"other",message1:Zm,timestamp:new Date().toLocaleString()},Ow=Et.div`
