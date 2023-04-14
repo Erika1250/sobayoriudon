@@ -43,7 +43,7 @@ const InputContainer = styled.div`
 
 const Input = styled.input<{isMobile: boolean}>`
   flex: 1;
-  margin-right: 8px;
+  margin-right: ${({isMobile}) => isMobile ? '4px' : '8px'};
   padding: 8px;
   border: solid #afeeee;
   border-radius: 4px;
@@ -65,7 +65,7 @@ const ClearButton = styled.button<{isMobile: boolean}>`
   border-radius: 4px;
   padding: 6px 12px;
   cursor: pointer;
-  margin-left: ${({isMobile}) => isMobile ? '8px' : '10px'};
+  margin-left: ${({isMobile}) => isMobile ? '4px' : '8px'};
 `;
 
 export default InputArea;
